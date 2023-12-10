@@ -21,7 +21,7 @@ void	ft_draw_line(t_window *window, t_proj_wire *a, t_proj_wire *b)
 	char			*pixel;
 
 	i = 0;
-	segment_lenght = ft_module2((b->x - a->x), (b->y - a->y));
+	segment_lenght = sqrt((b->x - a->x) * (b->x - a->x) + (b->y - a->y) * (b->y - a->y));
 	while (i <= (segment_lenght) && segment_lenght != 0)
 	{
 		p.x = ((b->x - a->x) * i / segment_lenght + a->x);
@@ -45,13 +45,10 @@ t_proj_wire	*ft_proj_wire(t_wire *wire, t_map *map)
 	proj = (t_proj_wire *)malloc(sizeof(t_proj_wire));
 	if (!proj)
 		return (NULL);
-	ft_apply_event(map->event, wire);
+	ft_apply_event(map, wire);
 	proj->x = map->proj_x(wire, map);
 	proj->y = map->proj_y(wire, map);
-	if (wire->hasColor)
-		proj->color = wire->color;
-	else
-		proj->color = ft_color_of(wire->color, map);
+	proj->color = wire->color;
 	return (proj);
 }
 
@@ -86,7 +83,7 @@ void	ft_draw_map(t_window *window, t_tmp_wires *tmp)
 	int			i;
 	int			j;
 
-	ft_apply_event(window->map->event, &window->map->center);
+	ft_apply_event(window->map, &window->map->center);
 	i = 0;
 	while (i < window->map->i)
 	{

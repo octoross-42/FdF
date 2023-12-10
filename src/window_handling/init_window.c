@@ -28,23 +28,6 @@ t_img	*ft_init_image(t_window *window)
 	return (img);
 }
 
-// double	effective_width;
-// 	double	effective_height;
-	
-// 	effective_width = ft_module2(map->proj_x(map->wires[0][map->j - 1], map),
-// 			map->proj_y(map->wires[0][map->j - 1], map));
-// 	effective_height = ft_module2(map->proj_x(map->wires[map->i - 1][0], map),
-// 			map->proj_y(map->wires[map->i - 1][0], map));
-// 	// TODO ajouter condition si map vide 
-// 	if ((MAP_WIDTH / effective_width) <= (MAP_HEIGHT / effective_height))
-// 		map->zoom = MAP_WIDTH / effective_width;
-// 	else
-// 		map->zoom = MAP_HEIGHT / effective_height;
-// 	map->tx = WINDOW_WIDTH / 2
-// 		- map->proj_x(&map->center, map);
-// 	map->ty = WINDOW_HEIGHT / 2
-// 		- map->proj_y(&map->center, map);
-
 void	ft_init_img_position(t_map *map)
 {
 	// TODO equation pour que coef s'applique sur la projection et pas sur la map de base
@@ -62,7 +45,6 @@ void	ft_init_img_position(t_map *map)
 	else
 		map->zoom_init = MAP_HEIGHT / height;
 	map->event.zoom = map->zoom_init;
-	map->event.init = 0;
 	map->event.tx = WINDOW_WIDTH / 2 - map->center.x;
 	map->event.ty = WINDOW_HEIGHT / 2 - map->center.y;
 	map->event.x = WINDOW_WIDTH / 2;

@@ -13,23 +13,25 @@
 #include "fdf.h"
 #include "vars.h"
 
-void	ft_apply_event(t_event event, t_wire *wire)
+void	ft_apply_event(t_map *map, t_wire *wire)
 {
-	if (event.init == 2)
+	if (map->event.init == 1 && !wire->hasColor)
+		wire->color = ft_color_of(wire->color, map);
+	if (map->event.init == 2)
 	{
 		wire->x = wire->j / 2 * CASE_WIDTH;
 		wire->y = wire->i / 2 * CASE_WIDTH;
 		wire->z = wire->altitude * CASE_HEIGHT;
 	}
-	if (event.tx != 0)
-		wire->x += event.tx;
-	if (event.ty != 0)
-		wire->y += event.ty;
-	if (event.zoom != 0)
+	if (map->event.tx != 0)
+		wire->x += map->event.tx;
+	if (map->event.ty != 0)
+		wire->y += map->event.ty;
+	if (map->event.zoom != 0)
 	{
-		wire->x = event.x + (wire->x - event.x) * event.zoom;
-		wire->y = event.y + (wire->y - event.y) * event.zoom;
-		wire->z = wire->z * event.zoom;
+		wire->x = map->event.x + (wire->x - map->event.x) * map->event.zoom;
+		wire->y = map->event.y + (wire->y - map->event.y) * map->event.zoom;
+		wire->z = wire->z * map->event.zoom;
 	}
 }
 
@@ -51,10 +53,6 @@ int	ft_mouse_release(int button, int x, int y, t_window *window)
 
 int	ft_move_mouse(int x, int y, t_window *window)
 {
-	// if (window->left_press)
-	// 	printf("translation : %d %d\n", x, y);
-	// else if (window->right_press)
-	// 	printf("rotation : %d %d\n", x, y);
 	if (!window->left_press && !window->right_press)
 		return (1);
 	if (window->left_press)
@@ -75,31 +73,14 @@ int	ft_move_mouse(int x, int y, t_window *window)
 
 int	ft_click_mouse(int button, int x, int y, t_window *window)
 {
-	printf("x : %d, y : %d\n", x, y);
 	if (button == 5)
-	{
 		window->map->event.zoom = pow(ZOOM_SCALE, -1);
-		printf("UP\n");
-	}
 	else if (button == 4)
-	{
-		printf("DOWN\n");
 		window->map->event.zoom = pow(ZOOM_SCALE, 1);
-	}
 	else if (button == 1)
-	{
 		window->left_press = 1;
-		window->mouse_x = x;
-		window->mouse_y = y;
-		printf("Left\n");
-	}
 	else if (button == 3)
-	{
 		window->right_press = 1;
-		window->mouse_x = x;
-		window->mouse_y = y;
-		printf("Right\n");
-	}
 	else if (button == 2)
 	{
 		window->map->event.init = 2;
@@ -108,14 +89,16 @@ int	ft_click_mouse(int button, int x, int y, t_window *window)
 		window->map->event.y = WINDOW_HEIGHT / 2;
 		window->map->event.tx = WINDOW_WIDTH / 2 - window->map->center.j / 2 * CASE_WIDTH;
 		window->map->event.ty = WINDOW_HEIGHT / 2 - window->map->center.i / 2 * CASE_WIDTH;
-		printf("Poink\n");
 	}
-	else
-		printf("button : %d\n", button);
 	if (1 <= button && button <= 5 && button != 2)
 	{
 		window->map->event.x = x;
 		window->map->event.y = y;
+	}
+	if (button == 1 ||button == 3)
+	{
+		window->mouse_x = x;
+		window->mouse_y = y;
 	}
 	if (1 <= button && button <= 5)
 		ft_draw(window);
