@@ -26,7 +26,7 @@ void	ft_draw_line(t_window *window, t_proj_wire *a, t_proj_wire *b)
 	{
 		p.x = ((b->x - a->x) * i / segment_lenght + a->x);
 		p.y = ((b->y - a->y) * i / segment_lenght + a->y);
-		p.color = (b->color - a->color) * i / segment_lenght + a->color;
+		p.color = ft_max(abs(b->color), abs(a->color));
 		if (0 <= p.x && p.x < WINDOW_WIDTH && 0 <= p.y && p.y < WINDOW_HEIGHT)
 		{
 			pixel = window->img->addr

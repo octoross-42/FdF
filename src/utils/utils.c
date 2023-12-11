@@ -14,26 +14,45 @@
 #include "fdf.h"
 #include "vars.h"
 
-int	ft_color_of(double z, t_map *map)
+int	ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+int	ft_color_of(int z, t_map *map)
 {
 	int	r;
 	int	g;
 	int	b;
-
-	if (map->max_color == map->min_color)
+	int	min;
+	int	max;
+	
+	max = ft_max(0, map->max_altitude);
+	min = ft_max(0, map->min_altitude);
+	if (map->max_altitude == map->min_altitude)
 		return ((255 << 16) | (255 << 8) | 255);
-	r = (z - map->min_color) * (MAX_COLOR_R - MIN_COLOR_R)
-		/ (map->max_color - map->min_color) + MIN_COLOR_R;
-	g = (z - map->min_color) * (MAX_COLOR_G - MIN_COLOR_G)
-		/ (map->max_color - map->min_color) + MIN_COLOR_G;
-	b = (z - map->min_color) * (MAX_COLOR_B - MIN_COLOR_B)
-		/ (map->max_color - map->min_color) + MIN_COLOR_B;
+	if (z >= 0)
+	{
+		r = z * (MAX_COLOR_R - 255) / map->max_altitude + 255;
+		g = z * (MAX_COLOR_G - 255) / map->max_altitude + 255;
+		b = z * (MAX_COLOR_B - 255) / map->max_altitude + 255;
+	}
+	else
+	{
+		r = z * (MIN_COLOR_R - 255) / map->min_altitude + 255;
+		g = z * (MIN_COLOR_G - 255) / map->min_altitude + 255;
+		b = z * (MIN_COLOR_B - 255) / map->min_altitude + 255;
+	}
 	return ((r << 16) | (g << 8) | b);
-}
-
-double	ft_module2(double x, double y)
-{
-	return (sqrt(x * x + y * y));
 }
 
 void	ft_clear_leftovers(t_gnl **leftovers)
