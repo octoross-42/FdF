@@ -16,7 +16,6 @@
 # define UTILS_H
 
 char	**free_until(char **tab, int index);
-double	ft_module2(double x, double y);;
 
 # include <math.h>
 # include <stdlib.h>
@@ -44,5 +43,7 @@ char	*gnl(int fd);
 
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *nptr);
+int		ft_max(int a, int b);
+int		ft_min(int a, int b);
 
 #endif

@@ -10,10 +10,12 @@ SRCS =  src/main.c \
 		src/utils/utils.c \
 		src/utils/gnl.c \
 		src/utils/read_altitude.c \
-		src/projections/cubic.c \
+		src/projections/conic.c \
 		src/projections/parallel.c \
 		src/projections/no.c \
 		src/projections/isometric.c \
+		src/projections/dimensions.c \
+		src/colors/density.c \
 
 OBJS = ${SRCS:.c=.o}
 
@@ -24,7 +26,7 @@ CFLAGS = -Wall -Wextra -Werror
 	$(CC) -I/usr/include -Iinclude/ -Imlx_linux -g3 -O3 -c $< -o ${<:.c=.o}	
 
 $(NAME): ${OBJS}
-	$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJS) -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 all : ${NAME}
 

@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <string.h>
 
+# include <time.h>
 # include <stddef.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -63,6 +64,7 @@ typedef struct s_wire
 	int		i;
 	int		j;
 	int		color;
+	double	density;
 	// TODO contradiction avec double 
 	// qui est accepte par le read de la map 
 	int		hasColor;
@@ -91,29 +93,46 @@ typedef struct s_event
 	int		init;
 	double	rx;
 	double	ry;
+	double	rz;
 	double	tx;
 	double	ty;
 	double	zoom;
+	double	zoom_z;
 	int		x;
 	int		y;
 }	t_event;
 
-void	ft_apply_event(t_event event, t_wire *wire);
-
 typedef struct s_map
 {
 	t_wire	center;
-	double	min_color;
-	double	max_color;
+	double	min_altitude;
+	double	max_altitude;
 	double	zoom_init;
 	int	i;
 	int	j;
 	t_wire	***wires;
 	int		num_proj;
-	double	(*proj_x)(t_wire *, struct s_map *map);
-	double	(*proj_y)(t_wire *, struct s_map *map);
+	void	(*proj)(t_proj_wire *, t_wire *, t_wire center);
+	double	sum_alt_pos;
+	double	sum_alt_neg;
+	double	nbr_alt_pos;
+	double	nbr_alt_neg;
+	double	width;
+	double	height;
+	clock_t t;
 	t_event	event;
 }	t_map;
+
+void	ft_no(t_proj_wire *to, t_wire *from, t_wire center);
+void	ft_set_dimensions(t_map *map);
+void	ft_apply_event(t_map *map, t_wire *wire);
+void	ft_isometric(t_proj_wire *to, t_wire *from, t_wire center);
+void	ft_conic(t_proj_wire *to, t_wire *from, t_wire center);
+void	ft_parallel(t_proj_wire *to, t_wire *from, t_wire center);
+
+void	ft_undo_isometric(t_proj_wire *to, t_wire *from, t_wire center);
+void	ft_undo_conic(t_proj_wire *to, t_wire *from, t_wire center);
+void	ft_undo_parallel(t_proj_wire *to, t_wire *from, t_wire center);
 
 double	ft_x_isometric(t_wire *wire, t_map *map);
 double	ft_y_isometric(t_wire *wire, t_map *map);
@@ -123,17 +142,19 @@ double	ft_x_no(t_wire *wire, t_map *map);
 double	ft_y_no(t_wire *wire, t_map *map);
 double	ft_x_undo_no(t_wire *wire, t_map *map);
 double	ft_y_undo_no(t_wire *wire, t_map *map);
-double	ft_x_cubic(t_wire *wire, t_map *map);
-double	ft_y_cubic(t_wire *wire, t_map *map);
-double	ft_x_undo_cubic(t_wire *wire, t_map *map);
-double	ft_y_undo_cubic(t_wire *wire, t_map *map);
+double	ft_x_conic(t_wire *wire, t_map *map);
+double	ft_y_conic(t_wire *wire, t_map *map);
+double	ft_x_undo_conic(t_wire *wire, t_map *map);
+double	ft_y_undo_conic(t_wire *wire, t_map *map);
 double	ft_x_parallel(t_wire *wire, t_map *map);
 double	ft_y_parallel(t_wire *wire, t_map *map);
 double	ft_x_undo_parallel(t_wire *wire, t_map *map);
 double	ft_y_undo_parallel(t_wire *wire, t_map *map);
 
 void	ft_init_img_position(t_map *map);
-int		ft_color_of(double z, t_map *map);
+int		ft_color_of(int z, t_map *map);
+void	ft_apply_density(t_map *map);
+int		ft_density_color_of(double density, double altitude, t_map *map);
 void	ft_clear_strs(char	**strs);
 void	ft_clear_map(t_map *map, int n, int m);
 t_map	*ft_init_map(char *path, int argc, char **argv);

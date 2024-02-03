@@ -29,8 +29,8 @@
 # define CASE_WIDTH 10
 # define CASE_HEIGHT 1
 # define ROTATION_SCALE 2 / M_PI
-# define TRANSLATION_SCALE 0.5
-// # define TRANSLATION_DIFF 1
+# define TRANSLATION_SCALE 1
+# define TRANSLATION_RESFRESH 0.1
 # define ZOOM_SCALE 1.05
 
 #endif

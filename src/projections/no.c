@@ -12,6 +12,12 @@
 
 #include "fdf.h"
 
+void	ft_no(t_proj_wire *to, t_wire *from, t_wire center)
+{
+	to->x = from->x;
+	to->y = from->y;
+}
+
 double	ft_x_no(t_wire *wire, t_map *map)
 {
 	return (wire->x);

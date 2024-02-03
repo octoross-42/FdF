@@ -31,20 +31,14 @@ t_img	*ft_init_image(t_window *window)
 void	ft_init_img_position(t_map *map)
 {
 	// TODO equation pour que coef s'applique sur la projection et pas sur la map de base
-	double	height;
-	double	width;
-	
-	height = map->proj_y(map->wires[map->i - 1][map->j - 1], map)
-		- map->proj_y(map->wires[0][0], map);
-	width = map->proj_x(map->wires[0][map->j - 1], map)
-		- map->proj_x(map->wires[map->i - 1][0], map);
-	// printf("width and height : %f %f\n", width, height);
+	ft_set_dimensions(map);
 
-	if (MAP_WIDTH / width < MAP_HEIGHT / height)
-		map->zoom_init = MAP_WIDTH / width;
+	if (MAP_WIDTH / map->width < MAP_HEIGHT / map->height)
+		map->zoom_init = MAP_WIDTH / map->width;
 	else
-		map->zoom_init = MAP_HEIGHT / height;
+		map->zoom_init = MAP_HEIGHT / map->height;
 	map->event.zoom = map->zoom_init;
+	map->event.zoom_z = map->zoom_init;
 	map->event.tx = WINDOW_WIDTH / 2 - map->center.x;
 	map->event.ty = WINDOW_HEIGHT / 2 - map->center.y;
 	map->event.x = WINDOW_WIDTH / 2;

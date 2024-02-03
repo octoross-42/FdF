@@ -13,6 +13,33 @@
 #include "fdf.h"
 #include "vars.h"
 
+// TODO DEUX EN UN AVEC wire reception et wire emetteur
+
+void	ft_isometric(t_proj_wire *to, t_wire *from, t_wire center)
+{
+	double	x;
+	double	y;
+
+	x = from->x - center.x;
+	y = from->y - center.y;
+	to->x = sqrt(2) / 2 * (x - y) + center.x;
+	to->y = sqrt(6) / 6 * (x + y - 2 * from->z) + center.y;
+}
+
+void	ft_undo_isometric(t_proj_wire *to, t_wire *from, t_wire center)
+{
+	double	x;
+	double	y;
+
+	x = from->x - center.x;
+	y = from->y - center.y;
+	to->x = sqrt(2) / 2 * (x + sqrt(3)
+			* y) + from->z / 6 + center.x;
+	to->y = sqrt(2) / 2 * (sqrt(3)
+			* y - x) + from->z / 6 + center.y;
+
+}
+
 double	ft_x_isometric(t_wire *wire, t_map *map)
 {
 	return (sqrt(2) / 2 * (wire->x - wire->y + map->center.y - map->center.x)

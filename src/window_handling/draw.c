@@ -26,7 +26,7 @@ void	ft_draw_line(t_window *window, t_proj_wire *a, t_proj_wire *b)
 	{
 		p.x = ((b->x - a->x) * i / segment_lenght + a->x);
 		p.y = ((b->y - a->y) * i / segment_lenght + a->y);
-		p.color = ft_max(abs(b->color), abs(a->color));
+		p.color = ft_min(b->color, a->color);
 		if (0 <= p.x && p.x < WINDOW_WIDTH && 0 <= p.y && p.y < WINDOW_HEIGHT)
 		{
 			pixel = window->img->addr
@@ -46,8 +46,7 @@ t_proj_wire	*ft_proj_wire(t_wire *wire, t_map *map)
 	if (!proj)
 		return (NULL);
 	ft_apply_event(map, wire);
-	proj->x = map->proj_x(wire, map);
-	proj->y = map->proj_y(wire, map);
+	map->proj(proj, wire, map->center);
 	proj->color = wire->color;
 	return (proj);
 }
@@ -124,9 +123,11 @@ void	ft_draw(t_window *window)
 	window->map->event.init = 0;
 	window->map->event.rx = 0;
 	window->map->event.ry = 0;
+	window->map->event.rz = 0;
 	window->map->event.tx = 0;
 	window->map->event.ty = 0;
 	window->map->event.zoom = 0;
+	window->map->event.zoom_z = 0;
 	window->map->event.x = 0;
 	window->map->event.y = 0;
 	mlx_put_image_to_window(window->mlx, window->win, window->img->img, 0, 0);
