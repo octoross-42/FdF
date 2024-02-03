@@ -87,7 +87,7 @@ int	ft_len_line(char *line)
 
 	splited = ft_split(line, ' ');
 	if (!splited)
-		return (printf(ERR_MALLOC), -1);
+		return (ft_printf(ERR_MALLOC), -1);
 	j = 0;
 	while (splited[j])
 	{

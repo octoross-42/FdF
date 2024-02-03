@@ -11,6 +11,9 @@ SRCS =  src/main.c \
 		src/utils/split.c \
 		src/utils/utils.c \
 		src/utils/gnl.c \
+		src/utils/printf.c \
+		src/utils/puts.c \
+		src/utils/printf_utils.c \
 		src/utils/read_altitude.c \
 		src/projections/parallel.c \
 		src/projections/no.c \

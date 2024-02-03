@@ -64,17 +64,17 @@ t_window	*ft_init_window(t_map *map)
 
 	window = ft_init_win();
 	if (!window)
-		return (printf(ERR_MALLOC), NULL);
+		return (ft_printf(ERR_MALLOC), NULL);
 	window->mlx = mlx_init();
 	if (!window->mlx)
-		return (free(window), printf(ERR_MLX_INIT), NULL);
+		return (free(window), ft_printf(ERR_MLX_INIT), NULL);
 	window->win = mlx_new_window(window->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "Fdf Octoross");
 	if (!window->win)
 	{
 		mlx_destroy_display(window->mlx);
 		free(window->win);
-		return (free(window), printf(ERR_MLX_WIN), NULL);
+		return (free(window), ft_printf(ERR_MLX_WIN), NULL);
 	}
 	window->img = ft_init_image(window);
 	if (window->img == NULL)
@@ -82,7 +82,7 @@ t_window	*ft_init_window(t_map *map)
 		mlx_destroy_display(window->mlx);
 		free(window->win);
 		mlx_destroy_window(window->mlx, window->win);
-		return (free(window), printf(ERR_MLX_IMG), NULL);
+		return (free(window), ft_printf(ERR_MLX_IMG), NULL);
 	}
 	return (window->map = map, window);
 }

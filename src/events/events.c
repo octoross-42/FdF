@@ -44,7 +44,7 @@ void	ft_apply_operations(t_map *map, t_wire *wire)
 
 void	ft_apply_event(t_map *map, t_wire *wire)
 {
-	if (map->event.init == 1 && !wire->hasColor)
+	if (map->event.init == 1 && !wire->has_color)
 		wire->color = ft_color_of(wire->color, map);
 	else if (map->event.init == 2)
 	{

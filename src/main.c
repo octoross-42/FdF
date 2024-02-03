@@ -31,9 +31,9 @@ int	main(int argc, char **argv)
 	t_map		*map;
 
 	if (argc < 2)
-		return (printf(ERR_NO_MAP), 1);
+		return (ft_printf(ERR_NO_MAP), 1);
 	if (argc > 3)
-		return (printf(ERR_ARGS), 1);
+		return (ft_printf(ERR_ARGS), 1);
 	map = ft_get_map(argv[1], argc - 1, &argv[1]);
 	if (!map)
 		return (1);

@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef UTILS_H
 
 # define UTILS_H
-
-void	ft_free_until(void **tab, int index);
 
 # include <math.h>
 # include <stdlib.h>
@@ -38,6 +35,13 @@ typedef struct s_gnl
 
 void	ft_clear_leftovers(t_gnl **leftovers);
 void	ft_clean_and_next_lst(t_gnl **line);
+void	ft_free_until(void **tab, int index);
+
+size_t	ft_strlen(char *s);
+int		ft_strcmp(const char *s1, char *s2);
+int		ft_putnbr(long long n, int uppercase, unsigned long base, int p);
+int		ft_putstr(char *s);
+int		ft_putchar(char c);
 
 char	*gnl(int fd);
 int		ft_len_line(char *line);

@@ -72,16 +72,16 @@ t_altitude	ft_read_altitude(char *word)
 	t_altitude	altitude;
 	int			i;
 
-	altitude.isValid = 1;
-	altitude.hasColor = 0;
+	altitude.is_valid = 1;
+	altitude.has_color = 0;
 	altitude.color = 0;
 	i = ft_read_z(word, &altitude);
 	if (word[i] == '\n')
 		i ++;
 	if (i == 0 || word[i] != ',')
-		return (altitude.isValid = !word[i], altitude);
+		return (altitude.is_valid = !word[i], altitude);
 	i ++;
-	altitude.hasColor = 1;
-	altitude.isValid = ft_read_color(&word[i], &altitude);
+	altitude.has_color = 1;
+	altitude.is_valid = ft_read_color(&word[i], &altitude);
 	return (altitude);
 }

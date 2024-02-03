@@ -19,15 +19,15 @@ t_wire	*ft_wire(int i, int j, t_altitude altitude)
 
 	wire = (t_wire *)malloc(sizeof(t_wire));
 	if (!wire)
-		return (printf(ERR_MALLOC), NULL);
+		return (ft_printf(ERR_MALLOC), NULL);
 	wire->x = (double)j * CASE_WIDTH;
 	wire->y = (double)i * CASE_WIDTH;
 	wire->z = altitude.z * CASE_HEIGHT;
 	wire->altitude = altitude.z;
 	wire->i = 2 * i;
 	wire->j = 2 * j;
-	wire->hasColor = altitude.hasColor;
-	if (altitude.hasColor)
+	wire->has_color = altitude.has_color;
+	if (altitude.has_color)
 		wire->color = altitude.color;
 	else
 		wire->color = altitude.z;
@@ -64,7 +64,7 @@ void	ft_init_center(t_map *map)
 	map->center.altitude = 0;
 	map->center.density = 1;
 	map->center.color = 0;
-	map->center.hasColor = 1;
+	map->center.has_color = 1;
 }
 
 t_map	*ft_init_map(char *path, int argc, char **argv)
@@ -85,7 +85,6 @@ t_map	*ft_init_map(char *path, int argc, char **argv)
 	map->nbr_alt_neg = 0;
 	map->sum_alt_pos = 0;
 	map->sum_alt_neg = 0;
-	map->t = clock();
 	return (map);
 }
 

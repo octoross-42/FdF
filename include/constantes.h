@@ -36,7 +36,7 @@
 # define ERR_EMPTY "Map is empty : %s\n"
 # define ERR_MALLOC "Error : malloc failed\n"
 # define ERR_FORMAT "Bad format for map at : %s\nline %d, position %d\n"
-# define ERR_MAP "Map is not a rectangle: %s (line %d has a width of %d while before at %d)\n"
+# define ERR_MAP "Error :%s : line %d has a width of %d supposed to be %d\n"
 # define ERR_NO_MAP "Error : No map\n"
 # define ERR_ARGS "Error : Too many arguments\n"
 # define ERR_MLX_INIT "Error : mlx could not init\n"
