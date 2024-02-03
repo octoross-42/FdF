@@ -32,7 +32,6 @@ void	ft_init_img_position(t_map *map)
 {
 	// TODO equation pour que coef s'applique sur la projection et pas sur la map de base
 	ft_set_dimensions(map);
-
 	if (MAP_WIDTH / map->width < MAP_HEIGHT / map->height)
 		map->zoom_init = MAP_WIDTH / map->width;
 	else
@@ -45,17 +44,27 @@ void	ft_init_img_position(t_map *map)
 	map->event.y = WINDOW_HEIGHT / 2;
 }
 
-t_window	*ft_init_window(t_map *map)
+t_window	*ft_init_win(void)
 {
 	t_window	*window;
 
 	window = (t_window *)malloc(sizeof(t_window));
 	if (!window)
-		return (printf(ERR_MALLOC), NULL);
+		return (NULL);
 	window->left_press = 0;
 	window->right_press = 0;
 	window->mouse_x = 0;
 	window->mouse_y = 0;
+	return (window);
+}
+
+t_window	*ft_init_window(t_map *map)
+{
+	t_window	*window;
+
+	window = ft_init_win();
+	if (!window)
+		return (printf(ERR_MALLOC), NULL);
 	window->mlx = mlx_init();
 	if (!window->mlx)
 		return (free(window), printf(ERR_MLX_INIT), NULL);
@@ -84,20 +93,7 @@ void	ft_init_display(t_window *window)
 	mlx_key_hook(window->win, ft_key_press, window);
 	mlx_mouse_hook(window->win, ft_click_mouse, window);
 	mlx_hook(window->win, 17, 0, ft_bybye, window);
-	mlx_hook(window->win, 6, (1L<<6), ft_move_mouse, window);
-	mlx_hook(window->win, 5, (1L<<3), ft_mouse_release, window);
-	// mlx_hook(window->win, 6, (1L<<10), ft_move_mouse, window);
+	mlx_hook(window->win, 6, (1L << 6), ft_move_mouse, window);
+	mlx_hook(window->win, 5, (1L << 3), ft_mouse_release, window);
 	mlx_loop(window->mlx);
-}
-
-int	ft_bybye(t_window *window)
-{
-	mlx_destroy_image(window->mlx, window->img->img);
-	free(window->img);
-	mlx_destroy_window(window->mlx, window->win);
-	mlx_destroy_display(window->mlx);
-	free(window->mlx);
-	ft_clear_map(window->map, window->map->i, window->map->j);
-	free(window);
-	exit(0);
 }

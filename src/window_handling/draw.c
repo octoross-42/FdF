@@ -21,7 +21,8 @@ void	ft_draw_line(t_window *window, t_proj_wire *a, t_proj_wire *b)
 	char			*pixel;
 
 	i = 0;
-	segment_lenght = sqrt((b->x - a->x) * (b->x - a->x) + (b->y - a->y) * (b->y - a->y));
+	segment_lenght = sqrt((b->x - a->x) * (b->x - a->x)
+			+ (b->y - a->y) * (b->y - a->y));
 	while (i <= (segment_lenght) && segment_lenght != 0)
 	{
 		p.x = ((b->x - a->x) * i / segment_lenght + a->x);

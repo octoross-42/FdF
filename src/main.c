@@ -13,6 +13,18 @@
 #include "fdf.h"
 #include "constantes.h"
 
+int	ft_bybye(t_window *window)
+{
+	mlx_destroy_image(window->mlx, window->img->img);
+	free(window->img);
+	mlx_destroy_window(window->mlx, window->win);
+	mlx_destroy_display(window->mlx);
+	free(window->mlx);
+	ft_clear_map(window->map, window->map->i, window->map->j);
+	free(window);
+	exit(0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_window	*window;
