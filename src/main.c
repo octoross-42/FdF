@@ -17,7 +17,6 @@ int	main(int argc, char **argv)
 {
 	t_window	*window;
 	t_map		*map;
-	int			fd;
 
 	if (argc < 2)
 		return (printf(ERR_NO_MAP), 1);

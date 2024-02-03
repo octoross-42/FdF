@@ -6,7 +6,7 @@
 /*   By: octoross <octoross@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:40:40 by octoross          #+#    #+#             */
-/*   Updated: 2024/02/03 15:27:06 by octoross         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:41:52 by octoross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 int	ft_mouse_release(int button, int x, int y, t_window *window)
 {
+	(void)(x + y);
 	if (button == 1)
 		window->left_press = 0;
 	else if (button == 3)
 		window->right_press = 0;
+	return (0);
 }
 
 int	ft_move_mouse(int x, int y, t_window *window)
@@ -40,6 +42,7 @@ int	ft_move_mouse(int x, int y, t_window *window)
 	window->mouse_x = x;
 	window->mouse_y = y;
 	ft_draw(window);
+	return (0);
 }
 
 void	ft_mouse_reset(t_window *window)
@@ -81,4 +84,5 @@ int	ft_click_mouse(int button, int x, int y, t_window *window)
 	}
 	if (1 <= button && button <= 5)
 		ft_draw(window);
+	return (0);
 }

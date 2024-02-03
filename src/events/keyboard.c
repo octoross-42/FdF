@@ -6,7 +6,7 @@
 /*   By: octoross <octoross@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:40:50 by octoross          #+#    #+#             */
-/*   Updated: 2024/02/03 15:20:56 by octoross         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:02:01 by octoross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ int	ft_key_press(int keycode, t_window *window)
 		window->map->event.y = WINDOW_HEIGHT / 2;
 	}
 	ft_draw(window);
+	return (0);
 }

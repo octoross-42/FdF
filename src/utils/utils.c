@@ -14,13 +14,6 @@
 #include "fdf.h"
 #include "constantes.h"
 
-int	ft_min(int a, int b)
-{
-	if (a <= b)
-		return (a);
-	return (b);
-}
-
 int	ft_max(int a, int b)
 {
 	if (a >= b)
@@ -35,7 +28,7 @@ int	ft_color_of(int z, t_map *map)
 	int	b;
 	int	min;
 	int	max;
-	
+
 	max = ft_max(0, map->max_altitude);
 	min = ft_max(0, map->min_altitude);
 	if (map->max_altitude == map->min_altitude)

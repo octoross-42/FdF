@@ -36,22 +36,22 @@ void	ft_undo_parallel(t_proj_wire *to, t_wire *from, t_wire center)
 			* y - x) + from->z / 6 + center.y;
 }
 
-double	ft_x_parallel(t_wire *wire, t_map *map)
-{
-	return (wire->x);
-}
+// double	ft_x_parallel(t_wire *wire, t_map *map)
+// {
+// 	return (wire->x);
+// }
 
-double	ft_y_parallel(t_wire *wire, t_map *map)
-{
-	return (wire->y);
-}
+// double	ft_y_parallel(t_wire *wire, t_map *map)
+// {
+// 	return (wire->y);
+// }
 
-double	ft_x_undo_parallel(t_wire *wire, t_map *map)
-{
-	return (wire->x);
-}
+// double	ft_x_undo_parallel(t_wire *wire, t_map *map)
+// {
+// 	return (wire->x);
+// }
 
-double	ft_y_undo_parallel(t_wire *wire, t_map *map)
-{
-	return (wire->y);
-}
+// double	ft_y_undo_parallel(t_wire *wire, t_map *map)
+// {
+// 	return (wire->y);
+// }

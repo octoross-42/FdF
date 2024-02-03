@@ -121,39 +121,22 @@ typedef struct s_map
 	t_event	event;
 }	t_map;
 
+
+void	ft_reset_event(t_map *map, int init);
+
 void	ft_no(t_proj_wire *to, t_wire *from, t_wire center);
 void	ft_set_dimensions(t_map *map);
 void	ft_apply_event(t_map *map, t_wire *wire);
 void	ft_isometric(t_proj_wire *to, t_wire *from, t_wire center);
-void	ft_conic(t_proj_wire *to, t_wire *from, t_wire center);
 void	ft_parallel(t_proj_wire *to, t_wire *from, t_wire center);
 
 void	ft_undo_isometric(t_proj_wire *to, t_wire *from, t_wire center);
-void	ft_undo_conic(t_proj_wire *to, t_wire *from, t_wire center);
 void	ft_undo_parallel(t_proj_wire *to, t_wire *from, t_wire center);
-
-double	ft_x_isometric(t_wire *wire, t_map *map);
-double	ft_y_isometric(t_wire *wire, t_map *map);
-double	ft_x_undo_isometric(t_wire *wire, t_map *map);
-double	ft_y_undo_isometric(t_wire *wire, t_map *map);
-double	ft_x_no(t_wire *wire, t_map *map);
-double	ft_y_no(t_wire *wire, t_map *map);
-double	ft_x_undo_no(t_wire *wire, t_map *map);
-double	ft_y_undo_no(t_wire *wire, t_map *map);
-double	ft_x_conic(t_wire *wire, t_map *map);
-double	ft_y_conic(t_wire *wire, t_map *map);
-double	ft_x_undo_conic(t_wire *wire, t_map *map);
-double	ft_y_undo_conic(t_wire *wire, t_map *map);
-double	ft_x_parallel(t_wire *wire, t_map *map);
-double	ft_y_parallel(t_wire *wire, t_map *map);
-double	ft_x_undo_parallel(t_wire *wire, t_map *map);
-double	ft_y_undo_parallel(t_wire *wire, t_map *map);
 
 void	ft_init_img_position(t_map *map);
 int		ft_color_of(int z, t_map *map);
 void	ft_apply_density(t_map *map);
 int		ft_density_of(double density, double altitude, t_map *map);
-void	ft_clear_strs(char	**strs);
 void	ft_clear_map(t_map *map, int n, int m);
 t_map	*ft_init_map(char *path, int argc, char **argv);
 int		ft_map_dimension(int *fd, char *path, t_map	*map);

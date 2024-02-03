@@ -88,9 +88,9 @@ t_wire	**ft_fill_line(t_map *map, int *i, int *j, char **splited)
 			map->nbr_alt_neg ++;
 			map->sum_alt_neg += map_line[*j]->altitude;
 		}
-		if (*i == 0 && *j == 0 || map->min_altitude > altitude.z)
+		if ((*i == 0 && *j == 0) || (map->min_altitude > altitude.z))
 			map->min_altitude = altitude.z;
-		if (*i == 0 && *j == 0 || map->max_altitude < altitude.z)
+		if ((*i == 0 && *j == 0) || (map->max_altitude < altitude.z))
 			map->max_altitude = altitude.z;
 		(*j)++;
 	}
@@ -114,7 +114,7 @@ int	ft_fill_map(int fd, t_map *map, char *line)
 		if (!splited)
 			return (free(line), ft_clear_map(map, j, 0), printf(ERR_MALLOC), 1);
 		map->wires[i] = ft_fill_line(map, &i, &j, splited);
-		ft_clear_strs(splited);
+		ft_free_until((void **)splited, -1);
 		free(line);
 		if (!(map->wires[i]))
 			return (ft_clear_map(map, i, j), 1);

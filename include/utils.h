@@ -15,7 +15,7 @@
 
 # define UTILS_H
 
-char	**free_until(char **tab, int index);
+void	ft_free_until(void **tab, int index);
 
 # include <math.h>
 # include <stdlib.h>
@@ -40,10 +40,8 @@ void	ft_clear_leftovers(t_gnl **leftovers);
 void	ft_clean_and_next_lst(t_gnl **line);
 
 char	*gnl(int fd);
-
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *nptr);
 int		ft_max(int a, int b);
-int		ft_min(int a, int b);
 
 #endif

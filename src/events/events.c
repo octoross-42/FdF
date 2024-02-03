@@ -13,6 +13,20 @@
 #include "fdf.h"
 #include "constantes.h"
 
+void	ft_reset_event(t_map *map, int init)
+{
+	map->event.init = init;
+	map->event.rx = 0;
+	map->event.ry = 0;
+	map->event.rz = 0;
+	map->event.tx = 0;
+	map->event.ty = 0;
+	map->event.zoom = 0;
+	map->event.zoom_z = 0;
+	map->event.x = 0;
+	map->event.y = 0;
+}
+
 void	ft_apply_operations(t_map *map, t_wire *wire)
 {
 	if (map->event.tx != 0)

@@ -12,15 +12,14 @@
 
 #include "utils.h"
 
-char	**free_until(char **tab, int index)
+void	ft_free_until(void **tab, int index)
 {
 	int	i;
 
 	i = 0;
-	while (i < index)
+	while ((i < index && index >= 0) || tab[i])
 		free(tab[i++]);
 	free(tab);
-	return (0);
 }
 
 int	ft_nbr_words(char const *s, char c)
@@ -84,7 +83,7 @@ char	**ft_split(char const *s, char c)
 	{
 		splited[nbr_words] = ft_next_word(s, &i, c);
 		if (!splited[nbr_words])
-			return (free_until(splited, nbr_words));
+			return (ft_free_until((void **)splited, nbr_words), NULL);
 		nbr_words ++;
 	}
 	return (splited);
