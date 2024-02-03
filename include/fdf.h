@@ -16,7 +16,6 @@
 
 # include "utils.h"
 # include "printf.h"
-// TODO A REMPLACER printf et strcmp
 # include <stdio.h>
 # include <string.h>
 

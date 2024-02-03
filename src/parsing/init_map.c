@@ -37,17 +37,17 @@ t_wire	*ft_wire(int i, int j, t_altitude altitude)
 
 void	ft_set_projection(int argc, char **argv, t_map *map)
 {
-	if (argc == 1 || !strcmp(argv[1], "isometric"))
+	if (argc == 1 || !ft_strcmp(argv[1], "isometric"))
 	{
 		map->proj = ft_isometric;
 		map->num_proj = 1;
 	}
-	else if (argc == 2 && !strcmp(argv[1], "parallel"))
+	else if (argc == 2 && !ft_strcmp(argv[1], "parallel"))
 	{
 		map->proj = ft_parallel;
 		map->num_proj = 2;
 	}
-	else if (argc == 2 && !strcmp(argv[1], "no"))
+	else if (argc == 2 && !ft_strcmp(argv[1], "no"))
 	{
 		map->proj = ft_no;
 		map->num_proj = 0;
