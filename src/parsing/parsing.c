@@ -27,30 +27,17 @@ int	ft_open_map(int *fd, char *path, char **line)
 int	ft_map_dimension(int *fd, char *path, t_map	*map)
 {
 	char	*line;
-	char	**splited;
 	int		j;
-	int		newline;
 
 	if (ft_open_map(fd, path, &line) == 1)
 		return (1);
 	map->i = 0;
 	while (line)
 	{
-		splited = ft_split(line, ' ');
-		if (!splited)
-			return (free(line), printf(ERR_MALLOC), 1);
-		j = 0;
-		while (splited[j])
-		{
-			if (splited[j][0] == '\n')
-				newline = 1;
-			else
-				newline = 0;
-			free(splited[j ++]);
-		}
-		free(splited);
-		j -= newline;
+		j = ft_len_line(line);
 		free(line);
+		if (j < 0)
+			return (1);
 		if (map->i == 0)
 			map->j = j;
 		else if (map->j != j)
@@ -78,16 +65,7 @@ t_wire	**ft_fill_line(t_map *map, int *i, int *j, char **splited)
 		map_line[*j] = ft_wire(*i, *j, altitude);
 		if (!(map_line[*j]))
 			return ((*i)++, NULL);
-		if (map_line[*j]->altitude > 0)
-		{
-			map->nbr_alt_pos ++;
-			map->sum_alt_pos += map_line[*j]->altitude;
-		}
-		else if (map_line[*j]->altitude < 0)
-		{
-			map->nbr_alt_neg ++;
-			map->sum_alt_neg += map_line[*j]->altitude;
-		}
+		ft_update_density(map, map_line[*j]);
 		if ((*i == 0 && *j == 0) || (map->min_altitude > altitude.z))
 			map->min_altitude = altitude.z;
 		if ((*i == 0 && *j == 0) || (map->max_altitude < altitude.z))

@@ -40,6 +40,7 @@ void	ft_clear_leftovers(t_gnl **leftovers);
 void	ft_clean_and_next_lst(t_gnl **line);
 
 char	*gnl(int fd);
+int		ft_len_line(char *line);
 char	**ft_split(char const *s, char c);
 int		ft_atoi(const char *nptr);
 int		ft_max(int a, int b);

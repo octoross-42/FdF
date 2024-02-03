@@ -78,3 +78,26 @@ void	ft_clean_and_next_lst(t_gnl **line)
 		free(to_free);
 	}
 }
+
+int	ft_len_line(char *line)
+{
+	char	**splited;
+	int		j;
+	int		newline;
+
+	splited = ft_split(line, ' ');
+	if (!splited)
+		return (printf(ERR_MALLOC), -1);
+	j = 0;
+	while (splited[j])
+	{
+		if (splited[j][0] == '\n')
+			newline = 1;
+		else
+			newline = 0;
+		free(splited[j ++]);
+	}
+	free(splited);
+	j -= newline;
+	return (j);
+}

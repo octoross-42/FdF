@@ -123,6 +123,7 @@ typedef struct s_map
 
 
 void	ft_reset_event(t_map *map, int init);
+void	ft_update_density(t_map *map, t_wire *map_line);
 
 void	ft_no(t_proj_wire *to, t_wire *from, t_wire center);
 void	ft_set_dimensions(t_map *map);

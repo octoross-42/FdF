@@ -13,6 +13,20 @@
 #include "fdf.h"
 #include "constantes.h"
 
+void	ft_update_density(t_map *map, t_wire *map_line)
+{
+	if (map_line->altitude > 0)
+	{
+		map->nbr_alt_pos ++;
+		map->sum_alt_pos += map_line->altitude;
+	}
+	else if (map_line->altitude < 0)
+	{
+		map->nbr_alt_neg ++;
+		map->sum_alt_neg += map_line->altitude;
+	}
+}
+
 int	ft_density_of(double density, double altitude, t_map *map)
 {
 	int	r;
