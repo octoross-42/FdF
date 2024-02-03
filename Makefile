@@ -1,6 +1,8 @@
 NAME = fdf
 
 SRCS =  src/main.c \
+		src/events/mouse.c \
+		src/events/keyboard.c \
 		src/events/events.c \
 		src/window_handling/init_window.c \
 		src/window_handling/draw.c \

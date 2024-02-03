@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "vars.h"
+#include "constantes.h"
 
 t_img	*ft_init_image(t_window *window)
 {
@@ -51,21 +51,21 @@ t_window	*ft_init_window(t_map *map)
 
 	window = (t_window *)malloc(sizeof(t_window));
 	if (!window)
-		return (NULL);
+		return (printf(ERR_MALLOC), NULL);
 	window->left_press = 0;
 	window->right_press = 0;
 	window->mouse_x = 0;
 	window->mouse_y = 0;
 	window->mlx = mlx_init();
 	if (!window->mlx)
-		return (free(window), NULL);
+		return (free(window), printf(ERR_MLX_INIT), NULL);
 	window->win = mlx_new_window(window->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "Fdf Octoross");
 	if (!window->win)
 	{
 		mlx_destroy_display(window->mlx);
 		free(window->win);
-		return (free(window), NULL);
+		return (free(window), printf(ERR_MLX_WIN), NULL);
 	}
 	window->img = ft_init_image(window);
 	if (window->img == NULL)
@@ -73,7 +73,7 @@ t_window	*ft_init_window(t_map *map)
 		mlx_destroy_display(window->mlx);
 		free(window->win);
 		mlx_destroy_window(window->mlx, window->win);
-		return (free(window), NULL);
+		return (free(window), printf(ERR_MLX_IMG), NULL);
 	}
 	return (window->map = map, window);
 }

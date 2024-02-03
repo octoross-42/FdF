@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "vars.h"
+#include "constantes.h"
 
 void	ft_draw_line(t_window *window, t_proj_wire *a, t_proj_wire *b)
 {

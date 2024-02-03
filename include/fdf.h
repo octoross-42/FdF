@@ -15,8 +15,6 @@
 # define FDF_H
 
 # include "utils.h"
-
-
 // TODO A REMPLACER printf et strcmp
 # include <stdio.h>
 # include <string.h>
@@ -154,7 +152,7 @@ double	ft_y_undo_parallel(t_wire *wire, t_map *map);
 void	ft_init_img_position(t_map *map);
 int		ft_color_of(int z, t_map *map);
 void	ft_apply_density(t_map *map);
-int		ft_density_color_of(double density, double altitude, t_map *map);
+int		ft_density_of(double density, double altitude, t_map *map);
 void	ft_clear_strs(char	**strs);
 void	ft_clear_map(t_map *map, int n, int m);
 t_map	*ft_init_map(char *path, int argc, char **argv);

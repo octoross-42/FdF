@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "constantes.h"
 
 int	main(int argc, char **argv)
 {
@@ -19,14 +20,14 @@ int	main(int argc, char **argv)
 	int			fd;
 
 	if (argc < 2)
-		return (printf("Error : No map\n"), 1);
+		return (printf(ERR_NO_MAP), 1);
 	if (argc > 3)
-		return (printf("Error : Too many arguments\n"), 1);
+		return (printf(ERR_ARGS), 1);
 	map = ft_get_map(argv[1], argc - 1, &argv[1]);
 	if (!map)
-		return (printf("Error : cannot open/read map or malloc\n"), 1);
+		return (1);
 	window = ft_init_window(map);
 	if (!window)
-		return (printf("Error : window is having an existential crisis\n"), 1);
+		return (1);
 	ft_init_display(window);
 }

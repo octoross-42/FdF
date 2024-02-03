@@ -11,15 +11,16 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "constantes.h"
 
 int	ft_open_map(int *fd, char *path, char **line)
 {
 	*fd = open(path, O_RDONLY);
 	if ((*fd) < 0)
-		return (1);
+		return (printf(ERR_OPEN, path), 1);
 	*line = gnl(*fd);
 	if (!(*line))
-		return (1);
+		return (printf(ERR_EMPTY, path), 1);
 	return (0);
 }
 
@@ -28,6 +29,7 @@ int	ft_map_dimension(int *fd, char *path, t_map	*map)
 	char	*line;
 	char	**splited;
 	int		j;
+	int		newline;
 
 	if (ft_open_map(fd, path, &line) == 1)
 		return (1);
@@ -36,16 +38,23 @@ int	ft_map_dimension(int *fd, char *path, t_map	*map)
 	{
 		splited = ft_split(line, ' ');
 		if (!splited)
-			return (free(line), 1);
+			return (free(line), printf(ERR_MALLOC), 1);
 		j = 0;
 		while (splited[j])
+		{
+			if (splited[j][0] == '\n')
+				newline = 1;
+			else
+				newline = 0;
 			free(splited[j ++]);
+		}
 		free(splited);
+		j -= newline;
 		free(line);
 		if (map->i == 0)
 			map->j = j;
 		else if (map->j != j)
-			return (close(*fd), 1);
+			return (close(*fd), printf(ERR_MAP, path, map->i, j, map->j), 1);
 		map->i ++;
 		line = gnl(*fd);
 	}
@@ -59,12 +68,12 @@ t_wire	**ft_fill_line(t_map *map, int *i, int *j, char **splited)
 
 	map_line = (t_wire **)malloc(sizeof(t_wire *) * (map->j));
 	if (!(map_line))
-		return (NULL);
-	while (splited[*j])
+		return (printf(ERR_MALLOC), NULL);
+	while (splited[*j] && splited[*j][0] != '\n')
 	{
 		altitude = ft_read_altitude(splited[*j]);
 		if (!altitude.isValid)
-			return (printf("Bad format : %s\nlign %d, position %d\n",
+			return (printf(ERR_FORMAT,
 					splited[*j], *i, *j), NULL);
 		map_line[*j] = ft_wire(*i, *j, altitude);
 		if (!(map_line[*j]))
@@ -96,14 +105,14 @@ int	ft_fill_map(int fd, t_map *map, char *line)
 
 	map->wires = (t_wire ***)malloc(sizeof(t_wire **) * (map->i));
 	if (!(map->wires))
-		return (free(line), free(map), 1);
+		return (free(line), free(map), printf(ERR_MALLOC), 1);
 	i = 0;
 	while (line)
 	{
 		splited = ft_split(line, ' ');
 		j = 0;
 		if (!splited)
-			return (free(line), ft_clear_map(map, j, 0), 1);
+			return (free(line), ft_clear_map(map, j, 0), printf(ERR_MALLOC), 1);
 		map->wires[i] = ft_fill_line(map, &i, &j, splited);
 		ft_clear_strs(splited);
 		free(line);
@@ -127,7 +136,7 @@ t_map	*ft_get_map(char *path, int argc, char **argv)
 	fd = open(path, O_RDONLY);
 	line = gnl(fd);
 	if (!line)
-		return (NULL);
+		return (printf(ERR_EMPTY, path), NULL);
 	if (ft_fill_map(fd, map, line))
 		return (NULL);
 	close(fd);

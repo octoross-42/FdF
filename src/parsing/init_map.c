@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "vars.h"
+#include "constantes.h"
 
 t_wire	*ft_wire(int i, int j, t_altitude altitude)
 {
@@ -19,7 +19,7 @@ t_wire	*ft_wire(int i, int j, t_altitude altitude)
 
 	wire = (t_wire *)malloc(sizeof(t_wire));
 	if (!wire)
-		return (NULL);
+		return (printf(ERR_MALLOC), NULL);
 	wire->x = (double)j * CASE_WIDTH;
 	wire->y = (double)i * CASE_WIDTH;
 	wire->z = altitude.z * CASE_HEIGHT;
@@ -35,7 +35,7 @@ t_wire	*ft_wire(int i, int j, t_altitude altitude)
 	return (wire);
 }
 
-void	ft_clear_strs(char	**strs)
+void	ft_clear_strs(char **strs)
 {
 	int	i;
 
@@ -79,7 +79,7 @@ t_map	*ft_init_map(char *path, int argc, char **argv)
 		return (NULL);
 	map->num_proj = -1;
 	ft_set_projection(argc, argv, map);
-	if (ft_map_dimension(&fd, path, map) == 1)
+	if (ft_map_dimension(&fd, path, map))
 		return (free(map), NULL);
 	map->center.x = ((double)map-> j - 1) / 2 * CASE_WIDTH;
 	map->center.y = ((double)map-> i - 1) / 2 * CASE_WIDTH;

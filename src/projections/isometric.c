@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "vars.h"
+#include "constantes.h"
 
 // TODO DEUX EN UN AVEC wire reception et wire emetteur
 
